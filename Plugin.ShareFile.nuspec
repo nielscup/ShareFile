@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata minClientVersion="2.8.1">
+    <id>Plugin.ShareFile</id>
+    <version>0.0.1</version>
+    <title>ShareFile Plugin</title>
+    <authors>Niels Cup</authors>
+    <owners>Niels Cup</owners>
+    <licenseUrl>https://github.com/nielscup/ShareFile/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/nielscup/ShareFile</projectUrl>
+    <!--Default Icon, a template can be found:  https://raw.githubusercontent.com/jamesmontemagno/Xamarin-Templates/master/Plugins-Templates/icons/plugin_icon.png-->
+    <iconUrl>https://cupitcontent.blob.core.windows.net/images/cup-it.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Share File plugin for Xamarin iOS and Android
+    </description>
+    <summary>ShareFile Plugin for Xamarin iOS and Android.</summary>
+    <tags>xamarin, pcl, xam.pcl, plugin, plugin for xamarin, android, ios</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+
+    <!--Core-->
+    <file src="ShareFile/Plugin.ShareFile/bin/Release/Plugin.ShareFile.dll" target="lib\portable-net45+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\Plugin.ShareFile.dll" />
+    <file src="ShareFile/Plugin.ShareFile/bin/Release/Plugin.ShareFile.Abstractions.dll" target="lib\portable-net45+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\Plugin.ShareFile.Abstractions.dll" />
+                                                                                        
+    <!--Xamarin.Android-->
+    <file src="ShareFile/Plugin.ShareFile.Android/bin/Release/Plugin.ShareFile.Abstractions.dll" target="lib\MonoAndroid10\Plugin.ShareFile.Abstractions.dll" />
+    <file src="ShareFile/Plugin.ShareFile.Android/bin/Release/Plugin.ShareFile.dll" target="lib\MonoAndroid10\Plugin.ShareFile.dll" />
+    
+    <!--Xamarin.iOS-->
+    <file src="ShareFile/Plugin.ShareFile.iOSUnified/bin/iPhone/Release/Plugin.ShareFile.Abstractions.dll" target="lib\Xamarin.iOS10\Plugin.ShareFile.Abstractions.dll" />
+    <file src="ShareFile/Plugin.ShareFile.iOSUnified/bin/iPhone/Release/Plugin.ShareFile.dll" target="lib\Xamarin.iOS10\Plugin.ShareFile.dll"/>   
+  </files>
+</package>
