@@ -29,22 +29,23 @@ namespace ShareFileTest.Droid
 
             // Get our button from the layout resource,
             // and attach an event to it
-            shareLocalFileButton = FindViewById<Button>(Resource.Id.shareLocalFileButton);
-            shareLocalFileButton.Click += shareLocalFileButton_Click;
-
             Button shareRemoteFileButton = FindViewById<Button>(Resource.Id.shareRemoteFileButton);
             shareRemoteFileButton.Click += shareRemoteFileButton_Click;
+
+            shareLocalFileButton = FindViewById<Button>(Resource.Id.shareLocalFileButton);
+            shareLocalFileButton.Click += shareLocalFileButton_Click;
+            
             DownloadTestFile();
+        }
+                
+        async void shareRemoteFileButton_Click(object sender, EventArgs e)
+        {
+            await CrossShareFile.Current.ShareRemoteFile(remoteFileUrl, testFileName, "Share remote file");
         }
 
         void shareLocalFileButton_Click(object sender, EventArgs e)
         {
             CrossShareFile.Current.ShareLocalFile(testFilePath);
-        }
-
-        async void shareRemoteFileButton_Click(object sender, EventArgs e)
-        {
-            await CrossShareFile.Current.ShareRemoteFile(remoteFileUrl, testFileName, "Share remote file");
         }
 
         private async void DownloadTestFile()

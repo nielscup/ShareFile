@@ -9,5 +9,14 @@ namespace Plugin.ShareFile
   /// </summary>
   public class ShareFileImplementation : IShareFile
   {
+      public void ShareLocalFile(string localFilePath, string title = "")
+      {
+          throw new NotImplementedException();
+      }
+
+      public System.Threading.Tasks.Task ShareRemoteFile(string fileUri, string fileName, string title = "")
+      {
+          throw new NotImplementedException();
+      }
   }
 }

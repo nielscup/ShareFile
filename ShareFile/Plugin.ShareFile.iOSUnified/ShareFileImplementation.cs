@@ -33,7 +33,7 @@ namespace Plugin.ShareFile
       /// <param name="fileName">name of the file</param>
       /// <param name="title">Title of popup on share (not included in message)</param>
       /// <returns>awaitable bool</returns>
-      public async Task<bool> ShareRemoteFile(string fileUri, string fileName, string title = "")
+      public async Task ShareRemoteFile(string fileUri, string fileName, string title = "")
       {
             using (var webClient = new WebClient())
             {
@@ -41,7 +41,6 @@ namespace Plugin.ShareFile
                 var bytes = await webClient.DownloadDataTaskAsync(uri);
                 var filePath = WriteFile(fileName, bytes);
                 ShareLocalFile(filePath, title);
-                return true;
             }          
       }
 
