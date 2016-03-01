@@ -17,5 +17,5 @@ nuget pack Plugin.ShareFile.nuspec
 
 ```
 CrossShareFile.Current.ShareLocalFile (filePath, "Share file") ;
-await CrossShareFile.Current.ShareRemoteFile (fileUri, fileName);
+await CrossShareFile.Current.ShareRemoteFile ("https://developer.xamarin.com/recipes/android/data/adapters/offline.pdf", "offline.pdf");
 ```
