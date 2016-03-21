@@ -44,8 +44,11 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Niels Cup (93A7434JZ3)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>365f83cd-f482-4f81-af32-1519ffefb5b5</CodesignProvision>
+    <CodesignResourceRules />
+    <CodesignExtraArgs />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -86,7 +89,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <None Include="Info.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
+    <BundleResource Include="TestData\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ShareFile\Plugin.ShareFile.Abstractions\Plugin.ShareFile.Abstractions.csproj">

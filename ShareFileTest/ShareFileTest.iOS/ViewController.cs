@@ -16,7 +16,7 @@ namespace ShareFileTest.iOS
         UIButton shareLocalFileButton;
         string testFilePath;
         const string remoteFileUrl = "https://cupitcontent.blob.core.windows.net/images/cup-it.png";
-        const string testFileName = "testfile.png";
+        const string testFileName = "test123.png";
 
         public ViewController(IntPtr handle): base(handle) { }
                 
