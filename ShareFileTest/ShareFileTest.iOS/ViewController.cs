@@ -1,4 +1,5 @@
 ﻿using CoreGraphics;
+using Foundation;
 using Plugin.ShareFile;
 using System;
 using System.Net;
@@ -15,8 +16,12 @@ namespace ShareFileTest.iOS
 
         UIButton shareLocalFileButton;
         string testFilePath;
-        const string remoteFileUrl = "https://cupitcontent.blob.core.windows.net/images/cup-it.png";
-        const string testFileName = "test123.png";
+        
+        //const string remoteFileUrl = "https://cupitcontent.blob.core.windows.net/images/cup-it.png";
+        //const string testFileName = "test123.png";
+
+        const string remoteFileUrl = "https://developer.xamarin.com/guides/ios/platform_features/ios9/offline.pdf";
+        const string testFileName = "offline.pdf";        
 
         public ViewController(IntPtr handle): base(handle) { }
                 
@@ -41,9 +46,9 @@ namespace ShareFileTest.iOS
         }
 
         void shareLocalFileButton_TouchUpInside(object sender, EventArgs e)
-        {
-            CrossShareFile.Current.ShareLocalFile(testFilePath);
-        }
+        {            
+            CrossShareFile.Current.ShareLocalFile(testFilePath, "Share File Test");
+        }        
 
         public override void DidReceiveMemoryWarning()
         {

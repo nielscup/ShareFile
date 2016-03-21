@@ -46,7 +46,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer: Niels Cup (93A7434JZ3)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>365f83cd-f482-4f81-af32-1519ffefb5b5</CodesignProvision>
+    <CodesignProvision>59c0ff94-f56b-4025-953d-1ae078e62351</CodesignProvision>
     <CodesignResourceRules />
     <CodesignExtraArgs />
   </PropertyGroup>
