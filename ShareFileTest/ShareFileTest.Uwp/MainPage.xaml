@@ -1,0 +1,15 @@
+﻿<Page
+    x:Class="ShareFileTest.Uwp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ShareFileTest.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button x:Name="ShareLocalButton" Content="Share Local" HorizontalAlignment="Left" Margin="96,179,0,0" VerticalAlignment="Top" Height="44" Width="157" Click="ShareLocalButton_Click"/>
+        <Button x:Name="ShareRemoteButton" Content="Share Remote" HorizontalAlignment="Left" Margin="96,281,0,0" VerticalAlignment="Top" Width="157" Height="46" Click="ShareRemoteButton_Click"/>
+
+    </Grid>
+</Page>
