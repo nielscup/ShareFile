@@ -16,7 +16,7 @@ namespace Plugin.ShareFile
     {
         private string _chosenFile;
         private string _title;
-        private IStorageFile _remoteFile;
+        private IStorageFile _downloadedFile;
 
         public void ShareLocalFile(string localFilePath, string title = "Shared File")
         {
@@ -30,6 +30,8 @@ namespace Plugin.ShareFile
 
                 _chosenFile = localFilePath;
                 _title = title;
+
+                _downloadedFile = StorageFile.GetFileFromPathAsync(localFilePath).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();               
 
                 DataTransferManager.GetForCurrentView().DataRequested += MainPage_DataRequested;
                 DataTransferManager.ShowShareUI();
@@ -55,10 +57,10 @@ namespace Plugin.ShareFile
                 var uri = new Uri(fileUri);
                 var fileNameToUse = fileName ?? Path.GetFileName(fileUri);
                 var thumbnail = RandomAccessStreamReference.CreateFromUri(uri);
-                var remoteFIle = await StorageFile.CreateStreamedFileFromUriAsync(fileNameToUse, uri, thumbnail);
-                _remoteFile = await remoteFIle.CopyAsync(ApplicationData.Current.TemporaryFolder, fileNameToUse, NameCollisionOption.ReplaceExisting);
+                var remoteFile = await StorageFile.CreateStreamedFileFromUriAsync(fileNameToUse, uri, thumbnail);
+                _downloadedFile = await remoteFile.CopyAsync(ApplicationData.Current.TemporaryFolder, fileNameToUse, NameCollisionOption.ReplaceExisting);
 
-                _chosenFile = _remoteFile.Path;
+                _chosenFile = _downloadedFile.Path;
                 _title = title;
 
                 DataTransferManager.GetForCurrentView().DataRequested += MainPage_RemoteDataRequested;
@@ -74,7 +76,7 @@ namespace Plugin.ShareFile
         private void MainPage_RemoteDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             List<IStorageFile> files = new List<IStorageFile>();
-            files.Add(_remoteFile);
+            files.Add(_downloadedFile);
 
             args.Request.Data.Properties.Title = "Shared File for Exact";
             args.Request.Data.SetStorageItems(files);
@@ -83,7 +85,7 @@ namespace Plugin.ShareFile
         private async void MainPage_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             List<IStorageFile> files = new List<IStorageFile>();
-            files.Add(await StorageFile.GetFileFromPathAsync(_chosenFile));
+            files.Add(_downloadedFile);
 
             args.Request.Data.Properties.Title = "Shared File for Exact";
             args.Request.Data.SetStorageItems(files);
