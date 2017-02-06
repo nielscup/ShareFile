@@ -1,4 +1,4 @@
-# Share File Plugin for Xamarin
+# Share File Plugin for Xamarin and Windows (UWP)
 
 Share File for Xamarin.iOS and Xamarin.Android. This plugin will let you share files in Xamarin.Android and Xamarin.iOS. 
 
