@@ -12,6 +12,7 @@ nuget pack Plugin.ShareFile.nuspec
 **Supports**
 * Xamarin.iOS (Unified)
 * Xamarin.Android
+* Windows (UWP)
 
 ### Usage
 
