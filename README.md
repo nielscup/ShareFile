@@ -3,11 +3,8 @@
 Share File for Xamarin.iOS and Xamarin.Android. This plugin will let you share files in Xamarin.Android and Xamarin.iOS. 
 
 #### Setup
-* Coming soon to NuGet
-* Or run the following command to create a nuget package:
-```
-nuget pack Plugin.ShareFile.nuspec
-```
+* Available on nuget: https://www.nuget.org/packages/Plugin.ShareFile/
+* Install into your PCL project and Client projects.
 
 **Supports**
 * Xamarin.iOS (Unified)
