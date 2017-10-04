@@ -1,6 +1,6 @@
 # Share File Plugin for Xamarin and Windows
 
-Share File for Xamarin.iOS, Xamarin.Android and Windows. This plugin will let you share files in Xamarin.Android and Xamarin.iOS and Windows.
+Cross platform plugin to share files in Xamarin.Android, Xamarin.iOS and Windows.
 
 #### Setup
 * Available on nuget: https://www.nuget.org/packages/Plugin.ShareFile/
