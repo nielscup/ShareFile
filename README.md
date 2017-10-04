@@ -13,7 +13,12 @@ Share File for Xamarin.iOS, Xamarin.Android and Windows. This plugin will let yo
 
 ### Usage
 
+Share a local file:
 ```
 CrossShareFile.Current.ShareLocalFile (filePath, "Share file") ;
+```
+
+Share a remote file:
+```
 await CrossShareFile.Current.ShareRemoteFile ("https://developer.xamarin.com/recipes/android/data/adapters/offline.pdf", "offline.pdf");
 ```
