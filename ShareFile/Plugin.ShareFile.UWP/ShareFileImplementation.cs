@@ -18,7 +18,7 @@ namespace Plugin.ShareFile
         private string _title;
         private IStorageFile _downloadedFile;
 
-        public void ShareLocalFile(string localFilePath, string title = "Shared File")
+        public void ShareLocalFile(string localFilePath, string title = "Shared File", object view = null)
         {
             try
             {

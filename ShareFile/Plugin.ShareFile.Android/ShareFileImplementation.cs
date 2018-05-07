@@ -24,7 +24,7 @@ namespace Plugin.ShareFile
         /// <param name="localFilePath">path to local file</param>
         /// <param name="title">Title of popup on share (not included in message)</param>
         /// <returns>awaitable Task</returns>
-        public void ShareLocalFile(string localFilePath, string title = "")
+        public void ShareLocalFile(string localFilePath, string title = "", object view = null)
         {
             try
             {
