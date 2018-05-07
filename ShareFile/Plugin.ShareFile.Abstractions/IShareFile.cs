@@ -14,7 +14,7 @@ namespace Plugin.ShareFile.Abstractions
       /// <param name="localFilePath">path to local file</param>
       /// <param name="title">Title of popup on share (not included in message)</param>
       /// <returns>awaitable Task</returns>
-      void ShareLocalFile(string localFilePath, string title = "");
+      void ShareLocalFile(string localFilePath, string title = "", object view = null);
 
       /// <summary>
       /// Simply share a file from a remote resource on compatible services

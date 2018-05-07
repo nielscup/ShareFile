@@ -15,7 +15,7 @@ namespace Plugin.ShareFile
     /// </summary>
     public class ShareFileImplementation : IShareFile
     {
-        public void ShareLocalFile(string localFilePath, string title = "")
+        public void ShareLocalFile(string localFilePath, string title = "", object view = null)
         {
             try
             {
@@ -53,7 +53,19 @@ namespace Plugin.ShareFile
                 if (!string.IsNullOrWhiteSpace(title))
                     activityViewController.SetValueForKey(NSObject.FromObject(title), new NSString("subject"));
 
-                rootController.PresentViewController(activityViewController, true, null);
+                if(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
+                {
+                    rootController.PresentViewController(activityViewController, true, null);
+                }
+                else
+                {
+                    var shareView = view as UIView;
+                    if (shareView != null)
+                    {
+                        UIPopoverController popCont = new UIPopoverController(activityViewController);
+                        popCont.PresentFromRect(shareView.Frame, shareView, UIPopoverArrowDirection.Any, true);
+                    }
+                }
             }
             catch (Exception ex)
             {
