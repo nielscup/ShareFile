@@ -1,13 +1,10 @@
 # Share File Plugin for Xamarin and Windows
 
-Share File for Xamarin.iOS and Xamarin.Android. This plugin will let you share files in Xamarin.Android and Xamarin.iOS. 
+Cross platform plugin to share files in Xamarin.Android, Xamarin.iOS and Windows.
 
 #### Setup
-* Coming soon to NuGet
-* Or run the following command to create a nuget package:
-```
-nuget pack Plugin.ShareFile.nuspec
-```
+* Available on nuget: https://www.nuget.org/packages/Plugin.ShareFile/
+* Install into your PCL project and Client projects.
 
 **Supports**
 * Xamarin.iOS (Unified)
@@ -16,7 +13,12 @@ nuget pack Plugin.ShareFile.nuspec
 
 ### Usage
 
+Share a local file:
 ```
 CrossShareFile.Current.ShareLocalFile (filePath, "Share file") ;
+```
+
+Share a remote file:
+```
 await CrossShareFile.Current.ShareRemoteFile ("https://developer.xamarin.com/recipes/android/data/adapters/offline.pdf", "offline.pdf");
 ```
