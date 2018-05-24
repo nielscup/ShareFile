@@ -10,18 +10,14 @@ namespace ShareFileTest.iOS
     public partial class ViewController : UIViewController
     {
         public int yPos = 40;
-        int xPos;
-        private const int defaultHeight = 60;
-        private const int defaultWidth = 300;
+        const int defaultHeight = 60;
+        const int defaultWidth = 300;
 
         UIButton shareLocalFileButton;
         string testFilePath;
         
-        //const string remoteFileUrl = "https://cupitcontent.blob.core.windows.net/images/cup-it.png";
-        //const string testFileName = "test123.png";
-
-        const string remoteFileUrl = "https://developer.xamarin.com/guides/ios/platform_features/ios9/offline.pdf";
-        const string testFileName = "offline.pdf";        
+        const string remoteFileUrl = "https://cupitcontent.blob.core.windows.net/images/cup-it.png";
+        const string testFileName = "cup-it.png";
 
         public ViewController(IntPtr handle): base(handle) { }
                 
@@ -42,12 +38,12 @@ namespace ShareFileTest.iOS
                 
         async void shareRemoteFileButton_TouchUpInside(object sender, EventArgs e)
         {
-            await CrossShareFile.Current.ShareRemoteFile(remoteFileUrl, testFileName, "Share remote file");
+            await CrossShareFile.Current.ShareRemoteFile(remoteFileUrl, testFileName, "Share remote file", sender);
         }
 
         void shareLocalFileButton_TouchUpInside(object sender, EventArgs e)
         {            
-            CrossShareFile.Current.ShareLocalFile(testFilePath, "Share File Test", shareLocalFileButton);
+            CrossShareFile.Current.ShareLocalFile(testFilePath, "Share File Test", sender);
         }        
 
         public override void DidReceiveMemoryWarning()

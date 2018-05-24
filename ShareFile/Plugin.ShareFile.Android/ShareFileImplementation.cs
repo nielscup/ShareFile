@@ -55,7 +55,7 @@ namespace Plugin.ShareFile
             catch (Exception ex)
             {
                 if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
-                    Console.WriteLine("Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
+                    Console.WriteLine("Exception in Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Plugin.ShareFile
         /// <param name="fileName">name of the file</param>
         /// <param name="title">Title of popup on share (not included in message)</param>
         /// <returns>awaitable bool</returns>
-        public async Task ShareRemoteFile(string fileUri, string fileName, string title = "")
+        public async Task ShareRemoteFile(string fileUri, string fileName, string title = "", object view = null)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Plugin.ShareFile
             catch (Exception ex)
             {
                 if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
-                    Console.WriteLine("Plugin.ShareFile: ShareRemoteFile Exception: {0}", ex.Message);
+                    Console.WriteLine("Exception in Plugin.ShareFile: ShareRemoteFile Exception: {0}", ex.Message);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Plugin.ShareFile
             catch (Exception ex)
             {
                 if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
-                    Console.WriteLine("Plugin.ShareFile: ShareRemoteFile Exception: {0}", ex);
+                    Console.WriteLine("Exception in Plugin.ShareFile: ShareRemoteFile Exception: {0}", ex);
             }
 
             return localPath;

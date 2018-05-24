@@ -14,7 +14,7 @@ namespace Plugin.ShareFile
           throw new NotImplementedException();
       }
 
-      public System.Threading.Tasks.Task ShareRemoteFile(string fileUri, string fileName, string title = "")
+        public System.Threading.Tasks.Task ShareRemoteFile(string fileUri, string fileName, string title = "", object view = null)
       {
           throw new NotImplementedException();
       }

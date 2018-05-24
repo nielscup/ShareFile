@@ -39,11 +39,11 @@ namespace Plugin.ShareFile
             catch (Exception ex)
             {
                 if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
-                    Debug.WriteLine("Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
+                    Debug.WriteLine("Exception in Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
             }
         }
 
-        public async Task ShareRemoteFile(string fileUri, string fileName, string title = "Shared File")
+        public async Task ShareRemoteFile(string fileUri, string fileName, string title = "Shared File", object view = null)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Plugin.ShareFile
             catch (Exception ex)
             {
                 if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
-                    Debug.WriteLine("Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
+                    Debug.WriteLine("Exception in Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
             }
         }
 
