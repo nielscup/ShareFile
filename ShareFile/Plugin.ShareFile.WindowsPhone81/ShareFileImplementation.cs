@@ -9,7 +9,7 @@ namespace Plugin.ShareFile
   /// </summary>
   public class ShareFileImplementation : IShareFile
   {
-      public void ShareLocalFile(string localFilePath, string title = "")
+      public void ShareLocalFile(string localFilePath, string title = "", object view = null)
       {
           throw new NotImplementedException();
       }

@@ -47,7 +47,7 @@ namespace ShareFileTest.iOS
 
         void shareLocalFileButton_TouchUpInside(object sender, EventArgs e)
         {            
-            CrossShareFile.Current.ShareLocalFile(testFilePath, "Share File Test");
+            CrossShareFile.Current.ShareLocalFile(testFilePath, "Share File Test", shareLocalFileButton);
         }        
 
         public override void DidReceiveMemoryWarning()
