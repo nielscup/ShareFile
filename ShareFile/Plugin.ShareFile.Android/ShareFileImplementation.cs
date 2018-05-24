@@ -98,7 +98,7 @@ namespace Plugin.ShareFile
 
             try
             {
-                var localFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+                var localFolder = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
                 localPath = System.IO.Path.Combine(localFolder, fileName);
                 File.WriteAllBytes(localPath, bytes); // write to local storage
 

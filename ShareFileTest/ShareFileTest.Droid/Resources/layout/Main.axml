@@ -12,6 +12,5 @@
         android:id="@+id/shareLocalFileButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Share Local File"
-        android:visibility="invisible" />
+        android:text="Share Local File" />
 </LinearLayout>

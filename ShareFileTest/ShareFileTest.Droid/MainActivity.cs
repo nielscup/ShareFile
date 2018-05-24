@@ -9,6 +9,8 @@ using Plugin.ShareFile;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace ShareFileTest.Droid
 {
@@ -34,18 +36,61 @@ namespace ShareFileTest.Droid
 
             shareLocalFileButton = FindViewById<Button>(Resource.Id.shareLocalFileButton);
             shareLocalFileButton.Click += shareLocalFileButton_Click;
-            
-            DownloadTestFile();
         }
-                
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
         async void shareRemoteFileButton_Click(object sender, EventArgs e)
         {
+            if (!await RequestStoragePermission()) return;
             await CrossShareFile.Current.ShareRemoteFile(remoteFileUrl, testFileName, "Share remote file");
         }
 
-        void shareLocalFileButton_Click(object sender, EventArgs e)
+        async void shareLocalFileButton_Click(object sender, EventArgs e)
         {
+            if (!await RequestStoragePermission()) return;
+            DownloadTestFile();
             CrossShareFile.Current.ShareLocalFile(testFilePath);
+        }
+
+        async Task<bool> RequestStoragePermission()
+        {
+            // Request Storage permission.
+            var permission = Permission.Storage;
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
+            if (status != PermissionStatus.Granted)
+            {
+                if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(permission))
+                {
+                    
+                }
+
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(permission);
+                //Best practice to always check that the key exists
+                if (results.ContainsKey(permission))
+                    status = results[permission];
+            }
+
+            if (status == PermissionStatus.Granted)
+            {
+                return true;
+            }
+            else
+            {
+                var dlgAlert = (new AlertDialog.Builder(this)).Create();
+
+                dlgAlert.SetTitle("Storage permission");
+                dlgAlert.SetMessage("This app needs storage permission");
+
+                dlgAlert.SetButton("OK", handllerDialogButton);
+                dlgAlert.Show();
+            }
+
+            return false;
         }
 
         private async void DownloadTestFile()
@@ -57,7 +102,13 @@ namespace ShareFileTest.Droid
                 testFilePath = WriteFile(testFileName, bytes);
             }
 
-            shareLocalFileButton.Visibility = ViewStates.Visible;
+            //shareLocalFileButton.Visibility = ViewStates.Visible;
+        }
+
+        void handllerDialogButton(object sender, DialogClickEventArgs e)
+        {
+            var objAlertDialog = sender as AlertDialog;
+            objAlertDialog.Dismiss();
         }
 
         /// <summary>
@@ -68,7 +119,8 @@ namespace ShareFileTest.Droid
         /// <param name="bytes">Bytes.</param>
         private string WriteFile(string fileName, byte[] bytes)
         {
-            var localFolder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            var localFolder = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
+
             string localPath = System.IO.Path.Combine(localFolder, fileName);
             File.WriteAllBytes(localPath, bytes); // write to local storage
 
