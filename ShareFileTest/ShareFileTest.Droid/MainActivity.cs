@@ -53,7 +53,7 @@ namespace ShareFileTest.Droid
         async void shareLocalFileButton_Click(object sender, EventArgs e)
         {
             if (!await RequestStoragePermission()) return;
-            DownloadTestFile();
+            await DownloadTestFile();
             CrossShareFile.Current.ShareLocalFile(testFilePath);
         }
 
@@ -86,14 +86,14 @@ namespace ShareFileTest.Droid
                 dlgAlert.SetTitle("Storage permission");
                 dlgAlert.SetMessage("This app needs storage permission");
 
-                dlgAlert.SetButton("OK", handllerDialogButton);
+                dlgAlert.SetButton("OK", HandlerDialogButton);
                 dlgAlert.Show();
             }
 
             return false;
         }
 
-        private async void DownloadTestFile()
+        private async Task DownloadTestFile()
         {
             using (var webClient = new WebClient())
             {
@@ -105,10 +105,9 @@ namespace ShareFileTest.Droid
             //shareLocalFileButton.Visibility = ViewStates.Visible;
         }
 
-        void handllerDialogButton(object sender, DialogClickEventArgs e)
+        void HandlerDialogButton(object sender, DialogClickEventArgs e)
         {
-            var objAlertDialog = sender as AlertDialog;
-            objAlertDialog.Dismiss();
+            if (sender is AlertDialog objAlertDialog) objAlertDialog.Dismiss();
         }
 
         /// <summary>
@@ -119,12 +118,12 @@ namespace ShareFileTest.Droid
         /// <param name="bytes">Bytes.</param>
         private string WriteFile(string fileName, byte[] bytes)
         {
-            var localFolder = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
+            var localFolder = Application.Context.CacheDir.AbsolutePath;
 
             string localPath = System.IO.Path.Combine(localFolder, fileName);
             File.WriteAllBytes(localPath, bytes); // write to local storage
 
-            return string.Format("file://{0}/{1}", localFolder, fileName);
+            return localPath;
         }
     }
 }
