@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using Plugin.ShareFile.Abstractions;
-
+using Android.Support.V4.Content;
 
 [assembly: Permission(Name = "android.permission.READ_EXTERNAL_STORAGE")]
 [assembly: Permission(Name = "android.permission.WRITE_EXTERNAL_STORAGE")]
@@ -34,10 +34,7 @@ namespace Plugin.ShareFile
                     return;
                 }
 
-                if (!localFilePath.StartsWith("file://"))
-                    localFilePath = string.Format("file://{0}", localFilePath);
-
-                var fileUri = Android.Net.Uri.Parse(localFilePath);
+                Android.Net.Uri fileUri = FileProvider.GetUriForFile(Application.Context, $"{Application.Context.PackageName}.fileprovider", new Java.IO.File(localFilePath));
 
                 var intent = new Intent();
                 intent.SetFlags(ActivityFlags.ClearTop);

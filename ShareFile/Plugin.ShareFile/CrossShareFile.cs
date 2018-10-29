@@ -8,7 +8,7 @@ namespace Plugin.ShareFile
   /// </summary>
   public class CrossShareFile
   {
-    static Lazy<IShareFile> Implementation = new Lazy<IShareFile>(() => CreateShareFile(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+    static readonly Lazy<IShareFile> Implementation = new Lazy<IShareFile>(CreateShareFile, System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
     /// <summary>
     /// Current settings to use
