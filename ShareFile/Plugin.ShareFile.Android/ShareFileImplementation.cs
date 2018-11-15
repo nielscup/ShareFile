@@ -41,7 +41,7 @@ namespace Plugin.ShareFile
                 Android.Net.Uri fileUri = FileProvider.GetUriForFile(Application.Context, $"{Application.Context.PackageName}.fileprovider", new Java.IO.File(localFilePath));
 
                 var builder =
-                    ShareCompat.IntentBuilder.From(CrossCurrentActivity.Current.Activity).SetText(title).AddStream(fileUri);
+                    ShareCompat.IntentBuilder.From(CrossCurrentActivity.Current.Activity).SetType(CrossCurrentActivity.Current.Activity.ContentResolver.GetType(fileUri)).SetText(title).AddStream(fileUri);
                 var chooserIntent = builder.CreateChooserIntent();
                 chooserIntent.SetFlags(ActivityFlags.ClearTop);
                 chooserIntent.SetFlags(ActivityFlags.NewTask);
