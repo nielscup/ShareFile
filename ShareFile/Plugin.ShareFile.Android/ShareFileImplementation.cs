@@ -20,8 +20,6 @@ namespace Plugin.ShareFile
     /// </summary> 
     public class ShareFileImplementation : IShareFile
     {
-
-
         /// <summary>
         /// Simply share a local file on compatible services
         /// </summary>
