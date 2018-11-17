@@ -6,8 +6,10 @@ using System;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using Android.Support.V4.App;
 using Plugin.ShareFile.Abstractions;
-
+using Android.Support.V4.Content;
+using Plugin.CurrentActivity;
 
 [assembly: Permission(Name = "android.permission.READ_EXTERNAL_STORAGE")]
 [assembly: Permission(Name = "android.permission.WRITE_EXTERNAL_STORAGE")]
@@ -34,31 +36,22 @@ namespace Plugin.ShareFile
                     return;
                 }
 
-                if (!localFilePath.StartsWith("file://"))
-                    localFilePath = string.Format("file://{0}", localFilePath);
+                Android.Net.Uri fileUri = FileProvider.GetUriForFile(Application.Context, $"{Application.Context.PackageName}.fileprovider", new Java.IO.File(localFilePath));
 
-                var fileUri = Android.Net.Uri.Parse(localFilePath);
-
-                var intent = new Intent();
-                intent.SetFlags(ActivityFlags.ClearTop);
-                intent.SetFlags(ActivityFlags.NewTask);
-                intent.SetAction(Intent.ActionSend);
-                intent.SetType("*/*");
-                intent.PutExtra(Intent.ExtraStream, fileUri);
-                intent.AddFlags(ActivityFlags.GrantReadUriPermission);
-
-                var chooserIntent = Intent.CreateChooser(intent, title);
+                var builder =
+                    ShareCompat.IntentBuilder.From(CrossCurrentActivity.Current.Activity).SetType(CrossCurrentActivity.Current.Activity.ContentResolver.GetType(fileUri)).SetText(title).AddStream(fileUri);
+                var chooserIntent = builder.CreateChooserIntent();
                 chooserIntent.SetFlags(ActivityFlags.ClearTop);
                 chooserIntent.SetFlags(ActivityFlags.NewTask);
-                Android.App.Application.Context.StartActivity(chooserIntent);
+                chooserIntent.AddFlags(ActivityFlags.GrantReadUriPermission);
+                CrossCurrentActivity.Current.Activity.StartActivity(chooserIntent);
             }
             catch (Exception ex)
             {
-                if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
+                if (!string.IsNullOrWhiteSpace(ex.Message))
                     Console.WriteLine("Exception in Plugin.ShareFile: ShareLocalFile Exception: {0}", ex);
             }
         }
-
         /// <summary>
         /// Simply share a file from a remote resource on compatible services
         /// </summary>
@@ -81,7 +74,7 @@ namespace Plugin.ShareFile
             }
             catch (Exception ex)
             {
-                if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
+                if (!string.IsNullOrWhiteSpace(ex.Message))
                     Console.WriteLine("Exception in Plugin.ShareFile: ShareRemoteFile Exception: {0}", ex.Message);
             }
         }
@@ -98,15 +91,15 @@ namespace Plugin.ShareFile
 
             try
             {
-                var localFolder = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
+                var localFolder = Application.Context.CacheDir.AbsolutePath;
                 localPath = System.IO.Path.Combine(localFolder, fileName);
                 File.WriteAllBytes(localPath, bytes); // write to local storage
 
-                return string.Format("file://{0}/{1}", localFolder, fileName);
+                return localPath;
             }
             catch (Exception ex)
             {
-                if (ex != null && !string.IsNullOrWhiteSpace(ex.Message))
+                if (!string.IsNullOrWhiteSpace(ex.Message))
                     Console.WriteLine("Exception in Plugin.ShareFile: ShareRemoteFile Exception: {0}", ex);
             }
 
