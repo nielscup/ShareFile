@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using CoreGraphics;
 using Foundation;
 using Plugin.ShareFile.Abstractions;
 using UIKit;
@@ -44,16 +45,11 @@ namespace Plugin.ShareFile
                 }
                 else
                 {
-                    var shareView = view as UIView;
-                    if (shareView != null)
-                    {
-                        UIPopoverController popCont = new UIPopoverController(activityViewController);
-                        popCont.PresentFromRect(shareView.Frame, shareView, UIPopoverArrowDirection.Any, true);
-                    }
-                    else
-                    {
-                        throw new Exception("view is null: for iPad you must pass the view paramater. The view parameter should be the view that triggers the share action, i.e. the share button.");
-                    }
+                    // Tablet
+                    var popup = new UIPopoverController(activityViewController);
+                    UIView tabview = UIApplication.SharedApplication.KeyWindow.RootViewController.View;
+                    CGRect rect = new CGRect(tabview.Frame.Width / 2, tabview.Frame.Height, 50, 50);
+                    popup.PresentFromRect(rect, tabview, UIPopoverArrowDirection.Any, true);
                 }
             }
             catch (Exception ex)
